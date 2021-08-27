@@ -22,7 +22,7 @@ class PlayerBenefitsController {
     private final PlayerBenefitResponseConverterRegistry registry;
 
     @GetMapping("/{playerId}")
-    public List<PlayerBenefitResponse> getPlayerBenefit(@PathVariable String playerId) {
+    public List<PlayerBenefitResponse> getPlayerBenefits(@PathVariable String playerId) {
         return playerBenefitsService.getPlayerBenefits(playerId)
                                     .stream()
                                     .map(playerBenefit -> registry.forBenefit(playerBenefit).toResponse(playerBenefit))

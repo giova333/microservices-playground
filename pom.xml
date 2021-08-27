@@ -10,6 +10,7 @@
 
     <modules>
         <module>player-benefits-service</module>
+        <module>payment-page-service</module>
     </modules>
 
 </project>
