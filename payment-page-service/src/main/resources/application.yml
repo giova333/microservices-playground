@@ -28,3 +28,8 @@ resilience4j:
         maxRetryAttempts: 3
         retryExceptions:
           - feign.FeignException$FeignServerException
+  bulkhead:
+    instances:
+      getPlayerBenefits:
+        maxConcurrentCalls: 30
+        maxWaitDuration: 10ms
