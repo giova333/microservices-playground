@@ -12,6 +12,7 @@
         <module>player-benefits-service</module>
         <module>payment-page-service</module>
         <module>eureka</module>
+        <module>gateway</module>
     </modules>
 
 </project>

@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: payment-page
+          uri: lb://payment-page
+          predicates:
+            - Path=/payment-page/public/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+  application:
+    name: gateway
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info,health,gateway
