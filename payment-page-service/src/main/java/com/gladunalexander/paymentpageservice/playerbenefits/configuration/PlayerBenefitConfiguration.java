@@ -4,6 +4,7 @@ import com.gladunalexander.paymentpageservice.playerbenefits.CoinsMultiplierPlay
 import com.gladunalexander.paymentpageservice.playerbenefits.PlayerBenefitsApplier;
 import com.gladunalexander.paymentpageservice.playerbenefits.PlayerBenefitsClient;
 import com.gladunalexander.paymentpageservice.playerbenefits.PlayerBenefitsFacade;
+import com.gladunalexander.paymentpageservice.playerbenefits.ResilientPlayerBenefitClientDecorator;
 import com.gladunalexander.paymentpageservice.playerbenefits.PriceDiscountPlayerBenefitsApplier;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -26,8 +27,13 @@ public class PlayerBenefitConfiguration {
     }
 
     @Bean
-    PlayerBenefitsFacade playerBenefitsFacade(PlayerBenefitsClient client,
+    ResilientPlayerBenefitClientDecorator resilientPlayerBenefitClientDecorator(PlayerBenefitsClient client) {
+        return new ResilientPlayerBenefitClientDecorator(client);
+    }
+
+    @Bean
+    PlayerBenefitsFacade playerBenefitsFacade(ResilientPlayerBenefitClientDecorator decorator,
                                               List<PlayerBenefitsApplier> playerBenefitsAppliers) {
-        return new PlayerBenefitsFacade(client, playerBenefitsAppliers);
+        return new PlayerBenefitsFacade(decorator, playerBenefitsAppliers);
     }
 }
