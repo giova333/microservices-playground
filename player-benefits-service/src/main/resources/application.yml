@@ -1,0 +1,22 @@
+aerospike:
+  host: localhost
+  namespace: payments
+  port: 3000
+eureka:
+  client:
+    enabled: true
+server:
+  port: 8081
+spring:
+  application:
+    name: player-benefits
+  boot:
+    admin:
+      client:
+        enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

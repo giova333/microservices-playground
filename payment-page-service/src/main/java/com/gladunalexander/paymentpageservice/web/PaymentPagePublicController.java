@@ -2,6 +2,8 @@ package com.gladunalexander.paymentpageservice.web;
 
 import com.gladunalexander.paymentpageservice.PaymentPageService;
 import com.gladunalexander.paymentpageservice.web.data.PaymentPageResponse;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ public class PaymentPagePublicController {
     private final PaymentPageService paymentPageService;
 
     @GetMapping
+    @Timed("PaymentPagePublicController.getPaymentPage.timed")
+    @Counted("PaymentPagePublicController.getPaymentPage.counted")
     public ResponseEntity<PaymentPageResponse> getPaymentPage(@RequestHeader String playerId) {
         return paymentPageService.getPaymentPageForPlayer(playerId)
                                  .map(PaymentPageConverters::toResponse)

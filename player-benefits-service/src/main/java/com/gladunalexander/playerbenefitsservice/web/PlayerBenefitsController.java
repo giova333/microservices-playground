@@ -3,6 +3,8 @@ package com.gladunalexander.playerbenefitsservice.web;
 import com.gladunalexander.playerbenefitsservice.PlayerBenefitsService;
 import com.gladunalexander.playerbenefitsservice.web.converter.PlayerBenefitResponseConverterRegistry;
 import com.gladunalexander.playerbenefitsservice.web.data.PlayerBenefitResponse;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ class PlayerBenefitsController {
     private final PlayerBenefitResponseConverterRegistry registry;
 
     @GetMapping("/{playerId}")
+    @Timed("PlayerBenefitsController.getPlayerBenefits.timed")
+    @Counted("PlayerBenefitsController.getPlayerBenefits.counted")
     public List<PlayerBenefitResponse> getPlayerBenefits(@PathVariable String playerId) {
         return playerBenefitsService.getPlayerBenefits(playerId)
                                     .stream()

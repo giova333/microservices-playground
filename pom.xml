@@ -11,6 +11,7 @@
     <modules>
         <module>player-benefits-service</module>
         <module>payment-page-service</module>
+        <module>eureka</module>
     </modules>
 
 </project>
