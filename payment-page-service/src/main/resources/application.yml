@@ -26,10 +26,22 @@ resilience4j:
     instances:
       getPlayerBenefits:
         maxRetryAttempts: 3
-        retryExceptions:
-          - feign.FeignException$FeignServerException
-  bulkhead:
+  thread-pool-bulkhead:
     instances:
       getPlayerBenefits:
-        maxConcurrentCalls: 30
-        maxWaitDuration: 10ms
+        maxThreadPoolSize: 50
+        coreThreadPoolSize: 20
+        queueCapacity: 1
+  timelimiter:
+    instances:
+      getPlayerBenefits:
+        timeoutDuration: 1s
+        cancelRunningFuture: true
+  circuitbreaker:
+    instances:
+      getPlayerBenefits:
+        slidingWindowSize: 50
+        minimumNumberOfCalls: 50
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 60s
+        failureRateThreshold: 50
