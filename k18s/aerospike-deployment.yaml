@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aerospike-deployment
+  namespace: default
+  labels:
+    app: aerospike
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aerospike
+  template:
+    metadata:
+      labels:
+        app: aerospike
+    spec:
+      containers:
+        - name: aerospike
+          image: aerospike/aerospike-server:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                configMapKeyRef:
+                  name: aerospike-configmap
+                  key: namespace

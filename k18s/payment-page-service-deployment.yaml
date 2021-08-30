@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-page-service-deployment
+  namespace: default
+  labels:
+    app: payment-page-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-page-service
+  template:
+    metadata:
+      labels:
+        app: payment-page-service
+    spec:
+      containers:
+        - name: payment-page-service
+          image: payment-page-service:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8082
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /actuator/health
+              port: 8082
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /actuator/health
+              port: 8082
+          env:
+            - name: eureka.client.serviceUrl.defaultZone
+              value: "http://eureka:8761/eureka"
+            - name: eureka.instance.preferIpAddress
+              value: "true"
+            - name: spring.datasource.url
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-page-service-configmap
+                  key: database-url

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: player-benefits-service-deployment
+  namespace: default
+  labels:
+    app: player-benefits-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: player-benefits-service
+  template:
+    metadata:
+      labels:
+        app: player-benefits-service
+    spec:
+      containers:
+        - name: player-benefits-service
+          image: player-benefits-service:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8081
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /actuator/health
+              port: 8081
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /actuator/health
+              port: 8081
+          env:
+            - name: eureka.client.serviceUrl.defaultZone
+              value: "http://eureka:8761/eureka"
+            - name: eureka.instance.preferIpAddress
+              value: "true"
+            - name: spring.aerospike.host
+              valueFrom:
+                configMapKeyRef:
+                  name: player-benefits-service-configmap
+                  key: aerospike-host

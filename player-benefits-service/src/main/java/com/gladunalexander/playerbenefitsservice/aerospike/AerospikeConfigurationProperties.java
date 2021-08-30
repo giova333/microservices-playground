@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 @Value
-@ConfigurationProperties(prefix = "aerospike")
+@ConfigurationProperties(prefix = "spring.aerospike")
 @ConstructorBinding
 public class AerospikeConfigurationProperties {
     Integer port;
