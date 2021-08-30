@@ -5,7 +5,6 @@ metadata:
 spec:
   selector:
     app: gateway
-  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 8080
