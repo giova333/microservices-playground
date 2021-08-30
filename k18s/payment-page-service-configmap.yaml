@@ -4,3 +4,4 @@ metadata:
   name: payment-page-service-configmap
 data:
   database-url: "jdbc:mysql://mysql:3306/payment_page"
+  player-benefits-uri: "http://player-benefits-service:8081"

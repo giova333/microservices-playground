@@ -33,7 +33,5 @@ spec:
               path: /actuator/health
               port: 8080
           env:
-            - name: eureka.instance.preferIpAddress
-              value: "true"
-            - name: eureka.client.serviceUrl.defaultZone
-              value: "http://eureka:8761/eureka"
+            - name: PAYMENT_PAGE_URI
+              value: "http://payment-page-service:8082"

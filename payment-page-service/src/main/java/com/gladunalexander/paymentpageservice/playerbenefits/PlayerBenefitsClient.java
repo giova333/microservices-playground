@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "player-benefits", path = "/internal/player-benefits")
+@FeignClient(
+        name = "player-benefits",
+        path = "/internal/player-benefits",
+        url = "${PLAYER_BENEFITS_URI}"
+)
 public interface PlayerBenefitsClient {
 
     @GetMapping("/{playerId}")

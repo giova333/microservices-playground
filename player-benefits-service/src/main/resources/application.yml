@@ -1,6 +1,3 @@
-eureka:
-  client:
-    enabled: true
 server:
   port: 8081
 spring:
@@ -10,10 +7,6 @@ spring:
     host: localhost
     namespace: payments
     port: 3000
-  boot:
-    admin:
-      client:
-        enabled: false
 
 management:
   endpoints:

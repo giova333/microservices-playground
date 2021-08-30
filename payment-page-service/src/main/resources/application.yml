@@ -1,13 +1,6 @@
-eureka:
-  client:
-    enabled: true
 spring:
   application:
     name: payment-page
-  boot:
-    admin:
-      client:
-        enabled: false
   datasource:
     password: password
     username: root

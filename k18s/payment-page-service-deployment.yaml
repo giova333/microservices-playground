@@ -33,12 +33,13 @@ spec:
               path: /actuator/health
               port: 8082
           env:
-            - name: eureka.client.serviceUrl.defaultZone
-              value: "http://eureka:8761/eureka"
-            - name: eureka.instance.preferIpAddress
-              value: "true"
             - name: spring.datasource.url
               valueFrom:
                 configMapKeyRef:
                   name: payment-page-service-configmap
                   key: database-url
+            - name: PLAYER_BENEFITS_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-page-service-configmap
+                  key: player-benefits-uri

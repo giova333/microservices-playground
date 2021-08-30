@@ -9,7 +9,7 @@ spring:
         response-timeout: 5s
       routes:
         - id: payment-page
-          uri: lb://payment-page
+          uri: ${PAYMENT_PAGE_URI}
           predicates:
             - Path=/payment-page/public/**
           filters:

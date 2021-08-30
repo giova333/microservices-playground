@@ -33,10 +33,6 @@ spec:
               path: /actuator/health
               port: 8081
           env:
-            - name: eureka.client.serviceUrl.defaultZone
-              value: "http://eureka:8761/eureka"
-            - name: eureka.instance.preferIpAddress
-              value: "true"
             - name: spring.aerospike.host
               valueFrom:
                 configMapKeyRef:
