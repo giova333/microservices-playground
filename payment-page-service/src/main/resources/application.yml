@@ -13,28 +13,3 @@ management:
         include: '*'
 server:
   port: 8082
-
-resilience4j:
-  retry:
-    instances:
-      getPlayerBenefits:
-        maxRetryAttempts: 3
-  thread-pool-bulkhead:
-    instances:
-      getPlayerBenefits:
-        maxThreadPoolSize: 50
-        coreThreadPoolSize: 20
-        queueCapacity: 1
-  timelimiter:
-    instances:
-      getPlayerBenefits:
-        timeoutDuration: 1s
-        cancelRunningFuture: true
-  circuitbreaker:
-    instances:
-      getPlayerBenefits:
-        slidingWindowSize: 50
-        minimumNumberOfCalls: 50
-        permittedNumberOfCallsInHalfOpenState: 10
-        waitDurationInOpenState: 60s
-        failureRateThreshold: 50

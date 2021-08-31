@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: player-benefits-service
+spec:
+  host: player-benefits-service
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http1MaxPendingRequests: 100
+        maxRequestsPerConnection: 1
+    outlierDetection:
+      consecutive5xxErrors: 10
+      interval: 1s
+      baseEjectionTime: 1m
+      maxEjectionPercent: 80
