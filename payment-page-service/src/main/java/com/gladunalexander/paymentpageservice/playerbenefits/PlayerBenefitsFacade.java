@@ -17,7 +17,9 @@ public class PlayerBenefitsFacade {
     private final List<PlayerBenefitsApplier> playerBenefitsAppliers;
 
     public void applyPlayerBenefits(String playerId, PaymentPage paymentPage) {
+        log.info("Fetching player benefits for player: {}", playerId);
         var playerBenefits = getPlayerBenefits(playerId);
+        log.info("Applying the following benefits {} for player {}", playerBenefits, playerId);
         playerBenefits.forEach(playerBenefit ->
                                        playerBenefitsAppliers.forEach(playerBenefitsApplier ->
                                                                               playerBenefitsApplier.apply(playerBenefit, paymentPage)));
