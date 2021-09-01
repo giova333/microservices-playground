@@ -3,9 +3,11 @@ package com.gladunalexander.paymentpageservice.playerbenefits;
 import com.gladunalexander.paymentpageservice.PaymentPage;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 public class PlayerBenefitsFacade {
 
@@ -14,8 +16,10 @@ public class PlayerBenefitsFacade {
 
     @SneakyThrows
     public void applyPlayerBenefits(String playerId, PaymentPage paymentPage) {
-        var playerBenefits = resilientPlayerBenefitClientDecorator.getPlayerBenefits(playerId);
-        playerBenefits.get().forEach(playerBenefit ->
+        log.info("Fetching player benefits for player: {}", playerId);
+        var playerBenefits = resilientPlayerBenefitClientDecorator.getPlayerBenefits(playerId).get();
+        log.info("Applying the following benefits {} for player {}", playerBenefits, playerId);
+        playerBenefits.forEach(playerBenefit ->
                                        playerBenefitsAppliers.forEach(playerBenefitsApplier ->
                                                                               playerBenefitsApplier.apply(playerBenefit, paymentPage)));
     }
