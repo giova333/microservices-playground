@@ -1,0 +1,10 @@
+chaos:
+  monkey:
+    enabled: true
+    watcher:
+      rest-controller: true
+
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: true

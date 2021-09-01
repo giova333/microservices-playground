@@ -1,0 +1,6 @@
+{
+  "latencyActive": false,
+  "exceptionsActive": true,
+  "killApplicationActive": false,
+  "level": 1
+}

@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <spring-boot-admin.version>2.4.3</spring-boot-admin.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <chaos-monkey.version>2.5.1</chaos-monkey.version>
     </properties>
     <dependencies>
         <dependency>
@@ -42,6 +43,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>chaos-monkey-spring-boot</artifactId>
+            <version>${chaos-monkey.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.resilience4j</groupId>

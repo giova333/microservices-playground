@@ -25,7 +25,9 @@ resilience4j:
   retry:
     instances:
       getPlayerBenefits:
-        maxRetryAttempts: 3
+        maxRetryAttempts: 2
+        retryExceptions:
+          - feign.FeignException$FeignServerException
   thread-pool-bulkhead:
     instances:
       getPlayerBenefits:

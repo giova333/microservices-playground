@@ -1,0 +1,8 @@
+{
+  "latencyRangeStart": 2000,
+  "latencyRangeEnd": 5000,
+  "latencyActive": true,
+  "exceptionsActive": false,
+  "killApplicationActive": false,
+  "level": 1
+}
