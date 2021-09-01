@@ -22,6 +22,14 @@ management:
   endpoint:
     gateway:
       enabled: true
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
   endpoints:
     web:
       exposure:

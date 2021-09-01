@@ -24,13 +24,13 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 5
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/liveness
               port: 8081
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/readiness
               port: 8081
           env:
             - name: spring.aerospike.host
