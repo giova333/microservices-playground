@@ -3,7 +3,6 @@ package com.gladunalexander.paymentpageservice.playerbenefits;
 import com.gladunalexander.paymentpageservice.playerbenefits.data.PlayerBenefitResponse;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +22,9 @@ public class ResilientPlayerBenefitClientDecorator {
 
     private final PlayerBenefitsClient playerBenefitsClient;
 
-    @Retry(name = GET_PLAYER_BENEFITS, fallbackMethod = "noBenefits")
     @Bulkhead(name = GET_PLAYER_BENEFITS, type = Bulkhead.Type.THREADPOOL)
     @TimeLimiter(name = GET_PLAYER_BENEFITS)
-    @CircuitBreaker(name = GET_PLAYER_BENEFITS)
+    @CircuitBreaker(name = GET_PLAYER_BENEFITS, fallbackMethod = "noBenefits")
     public CompletableFuture<List<PlayerBenefitResponse>> getPlayerBenefits(@PathVariable String playerId) {
         return completedFuture(playerBenefitsClient.getPlayerBenefits(playerId));
     }

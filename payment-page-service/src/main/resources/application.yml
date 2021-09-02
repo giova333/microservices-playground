@@ -12,6 +12,19 @@ spring:
     password: password
     username: root
     url: jdbc:mysql://localhost:3306/payment_page
+  cloud:
+    loadbalancer:
+      retry:
+        max-retries-on-next-service-instance: 2
+        max-retries-on-same-service-instance: 0
+        retryable-status-codes: 500
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 200
+        readTimeout: 1000
 
 management:
   endpoints:
@@ -21,13 +34,8 @@ management:
 server:
   port: 8082
 
+
 resilience4j:
-  retry:
-    instances:
-      getPlayerBenefits:
-        maxRetryAttempts: 2
-        retryExceptions:
-          - feign.FeignException$FeignServerException
   thread-pool-bulkhead:
     instances:
       getPlayerBenefits:
@@ -37,7 +45,7 @@ resilience4j:
   timelimiter:
     instances:
       getPlayerBenefits:
-        timeoutDuration: 1s
+        timeoutDuration: 4s
         cancelRunningFuture: true
   circuitbreaker:
     instances:
